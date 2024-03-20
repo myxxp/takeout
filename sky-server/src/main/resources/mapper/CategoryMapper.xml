@@ -34,13 +34,16 @@
     </delete>
 
 
-    <select id="pageQuery" resultType="com.sky.entity.Category">
+    <select id="pageQuery"  resultType="com.sky.entity.Category">
         select * from category
         <where>
             <if test="name != null and name != ''">
                 and name like concat('%', #{name}, '%')
             </if>
 
+            <if test="type != null">
+                and type = #{type}
+            </if>
         </where>
         order by create_time desc
     </select>

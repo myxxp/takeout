@@ -37,7 +37,7 @@ public class CategoryController {
         return Result.success();
     }
     /**
-     * 分页查询分类
+     * 分页查询分类  3-13 修复分类型查询BUG，在分页查询上添加了分类类型查询
      * @return
      */
     @GetMapping("/page")
@@ -52,6 +52,7 @@ public class CategoryController {
     /**
      * 根据分类类型查询分类
      * @return
+     * 3-13 修复BUG crab
      */
     @GetMapping("/list")
     @ApiOperation(value = "根据分类类型查询分类")
