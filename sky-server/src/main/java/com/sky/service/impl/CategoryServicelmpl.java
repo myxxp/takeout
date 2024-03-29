@@ -62,7 +62,7 @@ public class CategoryServicelmpl implements CategoryService {
      * @param type
      * @return
      */
-    public List<Category> getByType(int type) {
+    public List<Category> getByType(Integer type) {
 
         List<Category> category = categoryMapper.getByType(type);
         return category;

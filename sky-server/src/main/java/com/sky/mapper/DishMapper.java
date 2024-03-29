@@ -26,10 +26,12 @@ public interface DishMapper {
 
     /**
      * 获取菜品主键id
-     * @param ids
+     * @param id
      */
     @Select("select * from dish where id = #{id}")
     Dish selectDishById(Long id);
+
+
 
     /**
      * 删除菜品
@@ -54,4 +56,15 @@ public interface DishMapper {
 
     @Select("select * from dish where id in (select dish_id from setmeal_dish where setmeal_id = #{id})")
     List<Dish> selectDishBySetmealId(Long id);
+
+    /**
+     * 动态条件查询菜品
+     *
+     * @param dish
+     * @return
+     */
+    List<Dish> list(Dish dish);
+
+
+
 }

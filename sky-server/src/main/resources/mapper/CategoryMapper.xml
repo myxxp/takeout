@@ -49,6 +49,10 @@
     </select>
     <select id="getByType" resultType="com.sky.entity.Category">
         select * from category
-        WHERE type = #{type}
+        where status = 1
+        <if test="type != null">
+            and type = #{type}
+        </if>
+        order by sort asc,create_time desc
     </select>
 </mapper>

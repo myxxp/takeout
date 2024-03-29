@@ -17,6 +17,7 @@ import com.sky.mapper.SetmealDishMapper;
 import com.sky.mapper.SetmealMapper;
 import com.sky.result.PageResult;
 import com.sky.service.SetmealService;
+import com.sky.vo.DishItemVO;
 import com.sky.vo.SetmealVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,9 +82,11 @@ public class SetmealServiceImpl implements SetmealService {
         PageHelper.startPage(setmealPageQueryDTO.getPage(), setmealPageQueryDTO.getPageSize());
         Page<SetmealVO> page = setmealMapper.pageQuery(setmealPageQueryDTO);
 
-        long total = page.getTotal();
-        List<SetmealVO> result = page.getResult();
-        return new PageResult(total, result);
+//        long total = page.getTotal();
+//        List<SetmealVO> result = page.getResult();
+//        return new PageResult(total, result);
+        //修改代码 修复返回结果不显示套餐名称
+        return new PageResult(page.getTotal(), page.getResult());
     }
     /**
      * 更新套餐状态
@@ -185,6 +188,22 @@ public class SetmealServiceImpl implements SetmealService {
             });
             setmealDishMapper.addSetmealDish(setmealDishes);
         }
+
+
+    }
+    /**
+     * 根据分类id查询套餐
+     *
+     * @param categoryId
+     * @return
+     */
+    public List<Setmeal> getByCategory(Setmeal setmeal) {
+        List<Setmeal> setmeals = setmealMapper.getByCategory(setmeal);
+        return setmeals;
+    }
+
+    public List<DishItemVO> getSetmealDish(Long id) {
+        return setmealMapper.selectDishBySetmealId(id);
     }
 }
 

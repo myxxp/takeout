@@ -37,7 +37,7 @@ public interface CategoryMapper {
      */
 
     //Category getByType(int type);
-    List<Category>  getByType(int type);
+    List<Category>  getByType(Integer type);
 
     void deleteCategory(int id);
 

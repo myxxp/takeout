@@ -21,8 +21,11 @@ public interface CategoryService {
       * @return
       */
      PageResult page(CategoryPageQueryDTO categoryPageQueryDTO);
-
-     List<Category> getByType(int type);
+     /**
+      * 根据分类类型查询分类
+      * @return
+      */
+     List<Category> getByType(Integer type);
 
      void deleteCategory(int id);
 
