@@ -59,7 +59,7 @@ public interface SetmealService {
 
     /**
      * 根据分类id查询套餐
-     * @param categoryId
+     * @param setmeal
      * @return
      */
     List<Setmeal> getByCategory(Setmeal setmeal);
