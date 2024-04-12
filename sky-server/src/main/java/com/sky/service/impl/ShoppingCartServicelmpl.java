@@ -26,6 +26,8 @@ public class ShoppingCartServicelmpl implements ShoppingCartService{
 
     @Autowired
     private DishMapper dishMapper;
+
+    @Autowired
     private SetmealMapper setmealMapper;
 
 
