@@ -3,11 +3,15 @@ package com.sky.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.sky.constant.MessageConstant;
 import com.sky.constant.StatusConstant;
 import com.sky.context.BaseContext;
 import com.sky.dto.CategoryDTO;
 import com.sky.dto.CategoryPageQueryDTO;
+import com.sky.exception.DeletionNotAllowedException;
 import com.sky.mapper.CategoryMapper;
+import com.sky.mapper.DishMapper;
+import com.sky.mapper.SetmealMapper;
 import com.sky.result.PageResult;
 import com.sky.service.CategoryService;
 import org.springframework.beans.BeanUtils;
@@ -23,6 +27,11 @@ public class CategoryServicelmpl implements CategoryService {
 
     @Autowired
     private CategoryMapper categoryMapper;
+    @Autowired
+    private SetmealMapper setmealMapper;
+    @Autowired
+    private DishMapper dishMapper;
+
     /**
      * 添加分类
      * @param categoryDTO
@@ -71,9 +80,22 @@ public class CategoryServicelmpl implements CategoryService {
 
     /**
      * 删除分类
+     * 05-02 修复删除分类时，分类下存在菜品时无法删除的BUG
      * @param id
      */
-    public void deleteCategory(int id) {
+    public void deleteCategory(Long id) {
+        Integer count = dishMapper.countByCategoryId(id);
+        if (count > 0) {
+            throw new DeletionNotAllowedException(MessageConstant.CATEGORY_BE_RELATED_BY_DISH);
+        }
+
+        //查询当前分类是否关联了套餐，如果关联了就抛出业务异常
+        count = setmealMapper.countByCategoryId(id);
+        if(count > 0){
+            //当前分类下有菜品，不能删除
+            throw new DeletionNotAllowedException(MessageConstant.CATEGORY_BE_RELATED_BY_SETMEAL);
+        }
+
         categoryMapper.deleteCategory(id);
     }
     /**

@@ -172,7 +172,7 @@ public class SetmealServiceImpl implements SetmealService {
         BeanUtils.copyProperties(setmealDTO, setmeal);
         setmeal.setUpdateTime(LocalDateTime.now());
         setmeal.setUpdateUser(BaseContext.getCurrentId());
-        setmealMapper.updateSetmeal(setmeal);
+        setmealMapper.update(setmeal);
 
 
         //参考黑马答案完善代码

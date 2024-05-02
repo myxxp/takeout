@@ -9,7 +9,7 @@
         values
         (#{name}, #{categoryId}, #{price}, #{image}, #{status}, #{description}, #{createTime}, #{createUser}, #{updateTime}, #{updateUser})
     </insert>
-    <update id="updateSetmeal">
+    <update id="update" parameterType="Setmeal">
         update setmeal
         <set>
             <if test="name != null">
@@ -70,6 +70,18 @@
             </if>
             <if test="status != null">
                 and status = #{status}
+            </if>
+        </where>
+    </select>
+
+    <select id="countByMap" resultType="java.lang.Integer">
+        select count(id) from setmeal
+        <where>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="categoryId != null">
+                and category_id = #{categoryId}
             </if>
         </where>
     </select>

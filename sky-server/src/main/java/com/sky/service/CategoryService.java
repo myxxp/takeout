@@ -27,7 +27,7 @@ public interface CategoryService {
       */
      List<Category> getByType(Integer type);
 
-     void deleteCategory(int id);
+     void deleteCategory(Long id);
 
      void updateCategoryStatus(Integer status, long id);
 

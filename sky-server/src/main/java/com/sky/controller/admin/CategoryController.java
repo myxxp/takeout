@@ -68,11 +68,11 @@ public class CategoryController {
      * 删除分类
      * @return
      */
-    // TODO 删除分类逻辑待完善，分类下存在菜品时无法删除
+    //
     //@TODO day3 公共字段自动填充还没写
     @DeleteMapping()
     @ApiOperation(value = "删除分类")
-    public Result deleteCategory(int id){
+    public Result deleteCategory(Long id){
         log.info("删除分类：{}", id);
         categoryService.deleteCategory(id);
         return Result.success();
